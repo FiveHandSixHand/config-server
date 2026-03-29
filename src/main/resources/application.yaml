@@ -13,7 +13,7 @@ spring:
           uri: https://github.com/FiveHandSixHand/project-configs.git
           default-label: dev
           search-paths:
-	    - configs/common
+            - configs/common
             - configs/{application}
           clone-on-start: true
 
