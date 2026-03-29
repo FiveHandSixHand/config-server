@@ -10,11 +10,11 @@ spring:
     config:
       server:
         git:
-          uri: https://github.com/FiveHandSixHand/project-configs
+          uri: https://github.com/FiveHandSixHand/project-configs.git
           default-label: dev
           search-paths:
-            - common           # 공통 설정 폴더
-            - "{application}"   # 서비스별 폴더
+	    - configs/common
+            - configs/{application}
           clone-on-start: true
 
 eureka:
