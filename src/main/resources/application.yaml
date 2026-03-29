@@ -1,0 +1,33 @@
+server:
+  port: 8888
+
+spring:
+  application:
+    name: config-server
+  profiles:
+    active: git  # Git 저장소를 사용하겠다고 명시
+  cloud:
+    config:
+      server:
+        git:
+          uri: https://github.com/FiveHandSixHand/project-configs
+          default-label: dev
+          search-paths:
+            - common           # 공통 설정 폴더
+            - "{application}"   # 서비스별 폴더
+          clone-on-start: true
+
+eureka:
+  instance:
+    prefer-ip-address: true # 로컬 테스트 시 IP 기반이 더 정확할 때가 많음
+  client:
+    register-with-eureka: true
+    fetch-registry: true
+    service-url:
+      defaultZone: ${EUREKA_SERVER_URL:http://localhost:8761/eureka/}
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: refresh,health,info
