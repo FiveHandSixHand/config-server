@@ -15,16 +15,14 @@ Service Discovery: Eureka Server (http://localhost:8761)에 자동으로 등록�
 project-configs 내에 아래 구조로 파일을 배치해야 합니다.
 
 ```
-project-configs
-├── common/
-│   └── application.yml: 모든 서비스 공통 설정 (DB, Eureka 등) (로컬/default)
-│   ├── application-dev.yml         # 개발 서버 공통 설정
-│   └── application-prod.yml        # 운영 서버 공통 설정
-│
-└── {service-name}/
-    └── {service-name}.yml: 특정 서비스 기본 설정
-    └── {service-name}-{profile}.yml: 특정 서비스의 특정 환경(dev, prod) 전용 설정
-
+project-configs/
+└── configs/                  # 모든 설정은 이 폴더 내에 위치합니다.
+    ├── common/               # 모든 서비스 공통 설정 (DB, Eureka 등)
+    │   ├── application.yml
+    │   └── application-dev.yml
+    └── {service-name}/       # 서비스 전용 폴더 (예: user-service)
+        ├── {service-name}.yml (local)
+        └── {service-name}-dev.yml
 ```
 
 ## 🚀 클라이언트 서비스 설정 가이드
@@ -140,4 +138,5 @@ http://localhost:8888/{service-name}/{profile}
 
 ### 3. 보안
 
-데이터베이스 비밀번호나 API 키와 같은 민감 정보는 절대 평문으로 Push하지 마세요.
+- 데이터베이스 비밀번호나 API 키와 같은 민감 정보는 절대 평문으로 Push하지 마세요.
+- project-configs에 올라온 ${DB_PASSWORD} 같은 값은 실행 시점에 주입됩니다.
