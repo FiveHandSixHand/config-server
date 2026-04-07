@@ -5,16 +5,23 @@ spring:
   application:
     name: config-server
   profiles:
-    active: git  # Git 저장소를 사용하겠다고 명시
+    active: git
+#    active: native
   cloud:
     config:
       server:
+#        native:
+#          search-locations:
+#            - file:/C:/sparta/Da_it_da/project-configs/configs/common/
+#            - file:/C:/sparta/Da_it_da/project-configs/configs/user-service/
+#            - file:/C:/sparta/Da_it_da/project-configs/configs/gateway-server/
         git:
           uri: https://github.com/FiveHandSixHand/project-configs.git
           default-label: dev
           search-paths:
             - configs/common
             - configs/{application}
+            - 'configs/**'
           clone-on-start: true
 
 eureka:
@@ -24,7 +31,7 @@ eureka:
     register-with-eureka: true
     fetch-registry: true
     service-url:
-      defaultZone: ${EUREKA_SERVER_URL:http://localhost:8761/eureka/}
+      defaultZone: http://${EUREKA_HOST:localhost}:8761/eureka/
 
 management:
   endpoints:
