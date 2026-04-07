@@ -5,23 +5,16 @@ spring:
   application:
     name: config-server
   profiles:
-    active: git
-#    active: native
+    active: git  # Git 저장소를 사용하겠다고 명시
   cloud:
     config:
       server:
-#        native:
-#          search-locations:
-#            - file:/C:/sparta/Da_it_da/project-configs/configs/common/
-#            - file:/C:/sparta/Da_it_da/project-configs/configs/user-service/
-#            - file:/C:/sparta/Da_it_da/project-configs/configs/gateway-server/
         git:
           uri: https://github.com/FiveHandSixHand/project-configs.git
           default-label: dev
           search-paths:
             - configs/common
             - configs/{application}
-            - 'configs/**'
           clone-on-start: true
 
 eureka:
